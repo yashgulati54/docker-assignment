@@ -1,0 +1,34 @@
+# Name: Yash Gulati
+# SAP ID: 500083348
+# ROLL NO: R2142201335
+# Batch: 1
+# Course: Container Orchestration and Infrastructure Automation
+
+
+
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    container_name: server
+    volumes:
+      - servervol:/serverdata
+    ports:
+      - '8081:8081'
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: client
+    volumes:
+      - clientvol:/clientdata
+    depends_on:
+      - server
+
+volumes:
+  servervol:
+  clientvol:
